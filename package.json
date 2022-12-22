@@ -1,0 +1,26 @@
+{
+  "name": "planets",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "testing node I/O ",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jood80/node-io.git"
+  },
+  "keywords": [
+    "I/O"
+  ],
+  "author": "Nujood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jood80/node-io/issues"
+  },
+  "homepage": "https://github.com/Jood80/node-io#readme",
+  "dependencies": {
+    "csv-parse": "^5.3.3"
+  }
+}
