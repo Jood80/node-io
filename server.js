@@ -4,22 +4,31 @@ import { parse } from "csv-parse";
 const habitablePlanets = [];
 
 const isHabitablePlanet = (planet) => {
-  return planet['koi_disposition'] === 'CONFIRMED'
-}
+  return (
+    planet["koi_disposition"] === "CONFIRMED" &&
+    planet["koi_insol"] > 0.36 &&
+    planet["koi_insol"] < 1.11 &&
+    planet["koi_prad"] < 1.6
+  );
+};
+
 
 fs.createReadStream("kepler_data.csv")
-  .pipe(parse({
-    comment: "#",
-    columns: true,
-    relax: true,
-  }))
+  .pipe(
+    parse({
+      comment: "#",
+      columns: true,
+      relax: true,
+    })
+  )
   .on("data", (data) => {
-    if(isHabitablePlanet(data)) {
-      habitablePlanets.push(data)
+    if (isHabitablePlanet(data)) {
+      habitablePlanets.push(data);
     }
   })
   .on("error", (err) => console.log(err))
   .on("close", () => {
-    console.log("Records in buffer format", habitablePlanets)
+    console.log(`${habitablePlanets.length} habitable planets found! `);
+    console.log(habitablePlanets.map((planet) => planet["kepler_name"]));
   });
 
